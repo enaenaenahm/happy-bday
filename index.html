@@ -443,7 +443,7 @@
            
             // Возраст
             if (birthdayPerson.age) {
-                document.getElementById('ageDisplay').innerHTML = `Исполняется ${birthdayPerson.age} лет 🎂`;
+                document.getElementById('ageDisplay').innerHTML = `Исполнилось ${birthdayPerson.age} 🎂`;
             } else {
                 document.getElementById('ageDisplay').style.display = 'none';
             }
@@ -451,7 +451,6 @@
             // Поздравление
             const messageEl = document.getElementById('birthdayMessage');
             messageEl.innerHTML = `
-                Дорогой(ая) <strong>${birthdayPerson.name}</strong>!<br><br>
                 От всей души поздравляю тебя с днём рождения!<br>
                 Желаю тебе море улыбок, океан счастья,<br>
                 и чтобы все мечты обязательно сбывались!<br><br>
@@ -473,21 +472,6 @@
                 if (colors[birthdayPerson.color]) {
                     document.body.style.background = `linear-gradient(135deg, ${colors[birthdayPerson.color][0]}, ${colors[birthdayPerson.color][1]})`;
                 }
-            }
-            
-            // Фото
-            if (birthdayPerson.photo) {
-                const photoImg = document.getElementById('userPhoto');
-                const defaultPhoto = document.getElementById('defaultPhoto');
-                
-                photoImg.src = birthdayPerson.photo;
-                photoImg.style.display = 'block';
-                defaultPhoto.style.display = 'none';
-                
-                photoImg.onerror = () => {
-                    photoImg.style.display = 'none';
-                    defaultPhoto.style.display = 'flex';
-                };
             }
             
             // Дата рождения для обратного отсчета
