@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 215, 0, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 4s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .balloons {
+            position: relative;
+            height: 120px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .balloon {
+            font-size: 60px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+        }
+        
+        .balloon:nth-child(1) { animation-delay: 0s; }
+        .balloon:nth-child(2) { animation-delay: 0.5s; }
+        .balloon:nth-child(3) { animation-delay: 1s; }
+        .balloon:nth-child(4) { animation-delay: 1.5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .name-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            border: 3px solid gold;
+        }
+        
+        .birthday-person {
+            font-size: 42px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .age-badge {
+            display: inline-block;
+            background: gold;
+            color: #333;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .cake {
+            font-size: 80px;
+            text-align: center;
+            margin: 30px 0;
+            animation: bounce 1s infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .cake:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .message {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            border-left: 5px solid #667eea;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .wish-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .wish-item {
+            background: white;
+            padding: 20px 10px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .wish-item:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .wish-emoji {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .wish-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .countdown {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 18px;
+        }
+        
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .timer-block {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .timer-number {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .timer-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f00;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1000;
+            animation: confettiFall 3s linear forwards;
+        }
+        
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 5px solid gold;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: none;
+        }
+        
+        .default-photo {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+        
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        @media (max-width: 600px) {
+            .card { padding: 20px; }
+            .title { font-size: 36px; }
+            .birthday-person { font-size: 32px; }
+            .wish-grid { grid-template-columns: 1fr; }
+            .timer { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="birthdayCard">
+        <div class="balloons">
+            <span class="balloon">🎈</span>
+            <span class="balloon">🎈</span>
+            <span class="balloon">🎈</span>
+            <span class="balloon">🎈</span>
+        </div>
+        
+        <div class="title">
+            🎂 С ДНЁМ РОЖДЕНИЯ! 🎂
+        </div>
+        
+        <div class="photo-frame" id="photoFrame">
+            <div class="default-photo" id="defaultPhoto">🎁</div>
+            <img id="userPhoto" class="photo" style="display: none;" alt="Birthday person">
+        </div>
+        
+        <div class="name-container">
+            <div class="birthday-person" id="birthdayName">ЗАГРУЗКА...</div>
+            <div class="age-badge" id="ageDisplay"></div>
+        </div>
+        
+        <div class="cake" id="cake" onclick="blowCandles()">
+            🎂🕯️
+        </div>
+        
+        <div class="message" id="birthdayMessage">
+        </div>
+        
+        <div class="wish-grid">
+            <div class="wish-item" onclick="showWish('счастья')">
+                <div class="wish-emoji">😊</div>
+                <div class="wish-text">Счастья</div>
+            </div>
+            <div class="wish-item" onclick="showWish('здоровья')">
+                <div class="wish-emoji">💪</div>
+                <div class="wish-text">Здоровья</div>
+            </div>
+            <div class="wish-item" onclick="showWish('любви')">
+                <div class="wish-emoji">❤️</div>
+                <div class="wish-text">Любви</div>
+            </div>
+            <div class="wish-item" onclick="showWish('успехов')">
+                <div class="wish-emoji">📈</div>
+                <div class="wish-text">Успехов</div>
+            </div>
+            <div class="wish-item" onclick="showWish('денег')">
+                <div class="wish-emoji">💰</div>
+                <div class="wish-text">Богатства</div>
+            </div>
+            <div class="wish-item" onclick="showWish('путешествий')">
+                <div class="wish-emoji">✈️</div>
+                <div class="wish-text">Путешествий</div>
+            </div>
+        </div>
+        
+        <div class="countdown">
+            <div>До следующего дня рождения:</div>
+            <div class="timer" id="countdownTimer">
+            </div>
+        </div>
+        
+        <button onclick="celebrate()">
+            🎉 ЗАПУСТИТЬ ПРАЗДНИК 🎉
+        </button>
+        
+        <div style="text-align: center; margin-top: 20px; color: #999;">
+            ✨ С любовью и наилучшими пожеланиями ✨
+        </div>
+    </div>
+    
+    <div class="music-player" onclick="toggleMusic()" id="musicPlayer">
+        🔈 Включить музыку
+    </div>
+    
+    <script>
+        // Параметры из URL
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name') || 'Друг',
+                age: params.get('age') || '',
+                from: params.get('from') || 'Твои друзья',
+                color: params.get('color') || '',
+                photo: params.get('photo') || '',
+                date: params.get('date') || ''
+            };
+        }
+        
+        // Данные именинника
+        const params = getUrlParams();
+        const birthdayPerson = {
+            name: decodeURIComponent(params.name),
+            age: params.age,
+            from: decodeURIComponent(params.from),
+            color: params.color,
+            photo: params.photo,
+            birthDate: params.date
+        };
+        
+        function updateUI() {
+            // Имя
+            document.getElementById('birthdayName').innerHTML = birthdayPerson.name.toUpperCase() + '!';
+           
+            // Возраст
+            if (birthdayPerson.age) {
+                document.getElementById('ageDisplay').innerHTML = `Исполняется ${birthdayPerson.age} лет 🎂`;
+            } else {
+                document.getElementById('ageDisplay').style.display = 'none';
+            }
+            
+            // Поздравление
+            const messageEl = document.getElementById('birthdayMessage');
+            messageEl.innerHTML = `
+                Дорогой(ая) <strong>${birthdayPerson.name}</strong>!<br><br>
+                От всей души поздравляю тебя с днём рождения!<br>
+                Желаю тебе море улыбок, океан счастья,<br>
+                и чтобы все мечты обязательно сбывались!<br><br>
+                Пусть этот год принесёт много радости,<br>
+                новых достижений и приятных сюрпризов!
+            `;
+            
+            // Цветовая тема
+            if (birthdayPerson.color) {
+                const colors = {
+                    'red': ['#ff6b6b', '#ee5253'],
+                    'blue': ['#48dbfb', '#0abde3'],
+                    'green': ['#1dd1a1', '#10ac84'],
+                    'purple': ['#5f27cd', '#341f97'],
+                    'pink': ['#f368e0', '#ee5a24'],
+                    'gold': ['#ffd700', '#ffa500']
+                };
+                
+                if (colors[birthdayPerson.color]) {
+                    document.body.style.background = `linear-gradient(135deg, ${colors[birthdayPerson.color][0]}, ${colors[birthdayPerson.color][1]})`;
+                }
+            }
+            
+            // Фото
+            if (birthdayPerson.photo) {
+                const photoImg = document.getElementById('userPhoto');
+                const defaultPhoto = document.getElementById('defaultPhoto');
+                
+                photoImg.src = birthdayPerson.photo;
+                photoImg.style.display = 'block';
+                defaultPhoto.style.display = 'none';
+                
+                photoImg.onerror = () => {
+                    photoImg.style.display = 'none';
+                    defaultPhoto.style.display = 'flex';
+                };
+            }
+            
+            // Дата рождения для обратного отсчета
+            if (birthdayPerson.birthDate) {
+                startCountdown(birthdayPerson.birthDate);
+            } else {
+                startCountdown(); 
+            }
+        }
+        
+        // Обратный отсчет
+        function startCountdown(birthDate = null) {
+            function updateTimer() {
+                let nextBirthday;
+                
+                if (birthDate) {
+                    const today = new Date();
+                    const [day, month] = birthDate.split('-').map(Number);
+                    nextBirthday = new Date(today.getFullYear(), month - 1, day);
+                    
+                    if (nextBirthday < today) {
+                        nextBirthday.setFullYear(today.getFullYear() + 1);
+                    }
+                } else {
+
+                    const today = new Date();
+                    nextBirthday = new Date(today.getFullYear() + 1, 0, 1);
+                }
+                
+                const now = new Date();
+                const diff = nextBirthday - now;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdownTimer').innerHTML = `
+                    <div class="timer-block">
+                        <div class="timer-number">${days}</div>
+                        <div class="timer-label">дней</div>
+                    </div>
+                    <div class="timer-block">
+                        <div class="timer-number">${hours}</div>
+                        <div class="timer-label">часов</div>
+                    </div>
+                    <div class="timer-block">
+                        <div class="timer-number">${minutes}</div>
+                        <div class="timer-label">минут</div>
+                    </div>
+                    <div class="timer-block">
+                        <div class="timer-number">${seconds}</div>
+                        <div class="timer-label">секунд</div>
+                    </div>
+                `;
+            }
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+        
+        // Конфетти
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+        
+        // Праздничная функция
+        function celebrate() {
+            createConfetti();
+            
+            // Создаем всплывающие сообщения
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    showFloatingMessage('🎉 С днём рождения! 🎉');
+                }, i * 200);
+            }
+            
+            // Вибрация на мобильных
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+        }
+        
+        function showFloatingMessage(text) {
+            const msg = document.createElement('div');
+            msg.style.position = 'fixed';
+            msg.style.left = Math.random() * 100 + '%';
+            msg.style.top = Math.random() * 100 + '%';
+            msg.style.background = 'rgba(255, 255, 255, 0.9)';
+            msg.style.padding = '10px 20px';
+            msg.style.borderRadius = '50px';
+            msg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            msg.style.fontWeight = 'bold';
+            msg.style.color = '#667eea';
+            msg.style.zIndex = '1002';
+            msg.style.animation = 'fadeIn 0.5s, fadeOut 0.5s 2.5s forwards';
+            msg.innerHTML = text;
+            document.body.appendChild(msg);
+            
+            setTimeout(() => msg.remove(), 3000);
+        }
+        
+        // Задувание свечей
+        function blowCandles() {
+            const cake = document.getElementById('cake');
+            cake.innerHTML = '🎂';
+            createConfetti();
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+            
+            setTimeout(() => {
+                cake.innerHTML = '🎂🕯️';
+            }, 3000);
+        }
+        
+        // Пожелание
+        function showWish(wish) {
+            const wishes = {
+                'счастья': 'Пусть каждый день будет наполнен радостью и улыбками!',
+                'здоровья': 'Крепкого здоровья и жизненной энергии!',
+                'любви': 'Пусть сердце всегда будет согрето любовью!',
+                'успехов': 'Вершины покоряются, цели достигаются!',
+                'денег': 'Доходы растут, а расходы радуют!',
+                'путешествий': 'Новых стран, городов и впечатлений!'
+            };
+            
+            alert(wishes[wish] || 'Счастья и радости! 🎉');
+        }
+        
+        // Аудио объект
+        let audio = new Audio();
+        let isPlaying = false;
+
+        function toggleMusic() {
+            const player = document.getElementById('musicPlayer');
+            
+            if (!audio.src) {
+                // MP3 файл
+                audio.src = 'happy-birthday-to-you.mp3'; // Файл должен лежать в той же папке
+                audio.loop = true; // Зацикливаем воспроизведение
+                audio.volume = 0.5; // Громкость 50%
+            }
+            
+            if (!isPlaying) {
+                audio.play()
+                    .then(() => {
+                        player.innerHTML = '🔊 Выключить музыку';
+                        isPlaying = true;
+                    })
+                    .catch(error => {
+                        console.log('Ошибка воспроизведения:', error);
+                        alert('Нажмите на страницу, чтобы включить музыку (автозапуск заблокирован браузером)');
+                    });
+            } else {
+                audio.pause();
+                player.innerHTML = '🔈 Включить музыку';
+                isPlaying = false;
+            }
+        }
+        
+        // Запуск при загрузке
+        window.addEventListener('load', () => {
+            updateUI();
+            
+            // Автоматически запуск праздник через 1 секунду
+            setTimeout(celebrate, 1000);
+            
+            // Добавляем эффекты при клике на карточку
+            document.getElementById('birthdayCard').addEventListener('click', (e) => {
+                if (e.target.tagName !== 'BUTTON' && !e.target.classList.contains('wish-item')) {
+                    createConfetti();
+                }
+            });
+        });
+        
+        // Стили для анимаций
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeOut {
+                to { opacity: 0; transform: scale(0.5); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
