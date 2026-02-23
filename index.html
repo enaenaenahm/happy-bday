@@ -346,10 +346,13 @@
             <span class="balloon">🎈</span>
             <span class="balloon">🎈</span>
             <span class="balloon">🎈</span>
+            <span class="balloon">🎈</span>
+            <span class="balloon">🎈</span>
+            <span class="balloon">🎈</span>
         </div>
         
         <div class="title">
-            🎂 С ДНЁМ РОЖДЕНИЯ! 🎂
+             С ДНЁМ РОЖДЕНИЯ! 
         </div>
         
         <div class="photo-frame" id="photoFrame">
@@ -363,7 +366,7 @@
         </div>
         
         <div class="cake" id="cake" onclick="blowCandles()">
-            🎂🕯️
+            🎂
         </div>
         
         <div class="message" id="birthdayMessage">
@@ -396,18 +399,12 @@
             </div>
         </div>
         
-        <div class="countdown">
-            <div>До следующего дня рождения:</div>
-            <div class="timer" id="countdownTimer">
-            </div>
-        </div>
-        
         <button onclick="celebrate()">
             🎉 ЗАПУСТИТЬ ПРАЗДНИК 🎉
         </button>
         
         <div style="text-align: center; margin-top: 20px; color: #999;">
-            ✨ С любовью и наилучшими пожеланиями ✨
+            ✨ С любовью и наилучшими пожеланиями, Энже✨
         </div>
     </div>
     
@@ -501,57 +498,7 @@
             }
         }
         
-        // Обратный отсчет
-        function startCountdown(birthDate = null) {
-            function updateTimer() {
-                let nextBirthday;
-                
-                if (birthDate) {
-                    const today = new Date();
-                    const [day, month] = birthDate.split('-').map(Number);
-                    nextBirthday = new Date(today.getFullYear(), month - 1, day);
-                    
-                    if (nextBirthday < today) {
-                        nextBirthday.setFullYear(today.getFullYear() + 1);
-                    }
-                } else {
-
-                    const today = new Date();
-                    nextBirthday = new Date(today.getFullYear() + 1, 0, 1);
-                }
-                
-                const now = new Date();
-                const diff = nextBirthday - now;
-                
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                document.getElementById('countdownTimer').innerHTML = `
-                    <div class="timer-block">
-                        <div class="timer-number">${days}</div>
-                        <div class="timer-label">дней</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number">${hours}</div>
-                        <div class="timer-label">часов</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number">${minutes}</div>
-                        <div class="timer-label">минут</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number">${seconds}</div>
-                        <div class="timer-label">секунд</div>
-                    </div>
-                `;
-            }
-            
-            updateTimer();
-            setInterval(updateTimer, 1000);
-        }
-        
+ 
         // Конфетти
         function createConfetti() {
             const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
@@ -576,14 +523,14 @@
         function celebrate() {
             createConfetti();
             
-            // Создаем всплывающие сообщения
+            // Всплывающие сообщения
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     showFloatingMessage('🎉 С днём рождения! 🎉');
                 }, i * 200);
             }
             
-            // Вибрация на мобильных
+            // Вибрация
             if (navigator.vibrate) {
                 navigator.vibrate([200, 100, 200]);
             }
@@ -619,7 +566,7 @@
             }
             
             setTimeout(() => {
-                cake.innerHTML = '🎂🕯️';
+                cake.innerHTML = '🎂';
             }, 3000);
         }
         
@@ -646,8 +593,7 @@
             
             if (!audio.src) {
                 // MP3 файл
-                audio.src = 'happy-birthday-to-you.mp3'; // Файл должен лежать в той же папке
-                audio.loop = true; // Зацикливаем воспроизведение
+                audio.src = 'happy-birthday-to-you.mp3'; 
                 audio.volume = 0.5; // Громкость 50%
             }
             
@@ -672,10 +618,9 @@
         window.addEventListener('load', () => {
             updateUI();
             
-            // Автоматически запуск праздник через 1 секунду
             setTimeout(celebrate, 1000);
             
-            // Добавляем эффекты при клике на карточку
+            // Эффекты при клике на карточку
             document.getElementById('birthdayCard').addEventListener('click', (e) => {
                 if (e.target.tagName !== 'BUTTON' && !e.target.classList.contains('wish-item')) {
                     createConfetti();
